@@ -69,7 +69,7 @@ class charSeqRNN(object):
         if self.args['seed']==-1:
             self.args['seed']=datetime.now().microsecond
         np.random.seed(self.args['seed'])
-        tf.set_random_seed(self.args['seed'])
+        # tf.set_random_seed(self.args['seed'])/
                                         
         #Start tensorflow
         self.sess = tf.Session()
