@@ -37,7 +37,7 @@ if not os.path.isdir(rootDir + 'RNNTrainingSteps/Step3_SyntheticSentences'):
     os.mkdir(rootDir + 'RNNTrainingSteps/Step3_SyntheticSentences')
 #%%
 #First, we generate snippet libraries for each dataset by cutting out each letter from each sentence. These can then
-#be re-arranged into new sequences. 
+#be re-arranged into new لsequences.
 for dataDir in dataDirs:
     print('Processing ' + dataDir)
     
