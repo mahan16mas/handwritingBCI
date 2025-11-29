@@ -10,6 +10,8 @@ import scipy.special
 import pickle
 from dataPreprocessing import prepareDataCubesForRNN
 import sys
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 
 class charSeqRNN(object):
     """
