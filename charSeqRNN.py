@@ -381,7 +381,8 @@ class charSeqRNN(object):
         #This ensures we aren't accidentally changing the graph as we go (which degrades performance).
         self.sess.graph.finalize()
             
-        while i < self.args['nBatchesToTrain']:       
+        while i < self.args['nBatchesToTrain']:
+            print(i)
             #time how long this batch takes
             dtStart = datetime.now()
 
