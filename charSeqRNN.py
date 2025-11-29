@@ -383,8 +383,8 @@ class charSeqRNN(object):
         self.sess.graph.finalize()
             
         while i < self.args['nBatchesToTrain']:
-            print('*'*30)
-            print(i)
+            # print('*'*30)
+            # print(i)
             #time how long this batch takes
             dtStart = datetime.now()
 
