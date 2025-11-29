@@ -42,7 +42,8 @@ class charSeqRNN(object):
                 #otherwise we will load params but not try to resume a training run, we'll start over
                 self.loadingInitParams = True
                 self.resumeTraining = False   
-                
+
+
         elif self.args['mode']=='infer':
             self.isTraining = False
             self.loadingInitParams = True
