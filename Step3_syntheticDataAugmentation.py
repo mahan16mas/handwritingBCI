@@ -31,16 +31,16 @@ cvParts = ['HeldOutBlocks', 'HeldOutTrials']
 
 #defines the list of all 31 characters and what to call them
 charDef = getHandwritingCharacterDefinitions()
-
+syn_dir = 'Step3_SyntheticSentences55'
 #saves all synthetic sentences & snippet libraries in this folder
-if not os.path.isdir(rootDir + 'RNNTrainingSteps/Step3_SyntheticSentences'):
-    os.mkdir(rootDir + 'RNNTrainingSteps/Step3_SyntheticSentences')
+if not os.path.isdir(rootDir + 'RNNTrainingSteps/' + syn_dir):
+    os.mkdir(rootDir + 'RNNTrainingSteps/' + syn_dir)
 #%%
 #First, we generate snippet libraries for each dataset by cutting out each letter from each sentence. These can then
 #be re-arranged into new لsequences.
-for dataDir in dataDirs:
+for dataDir in dataDirs[:5]:
     print('Processing ' + dataDir)
-    
+
     for cvPart in cvParts:
         print('--' + cvPart)
         
@@ -79,9 +79,9 @@ for dataDir in dataDirs:
                                               charDef)
 
         #save results
-        if not os.path.isdir(rootDir + 'RNNTrainingSteps/Step3_SyntheticSentences/'+cvPart):
-            os.mkdir(rootDir + 'RNNTrainingSteps/Step3_SyntheticSentences/'+cvPart)
-        scipy.io.savemat(rootDir + 'RNNTrainingSteps/Step3_SyntheticSentences/'+cvPart+'/'+dataDir+'_snippets.mat', snippetDict)
+        if not os.path.isdir(rootDir + 'RNNTrainingSteps/' + syn_dir +'/' +cvPart):
+            os.mkdir(rootDir + 'RNNTrainingSteps/'+syn_dir+'/'+cvPart)
+        scipy.io.savemat(rootDir + 'RNNTrainingSteps/'+syn_dir+'/'+cvPart+'/'+dataDir+'_snippets.mat', snippetDict)
         
 #%%
 #Now we use the above snippet libraries to make synthetic data for each dataset and train/test partition.
@@ -90,13 +90,13 @@ for dataDir in dataDirs:
 #Decrease if it uses too much memory on your machine. (10 uses ~30 GB of RAM)
 nParallelProcesses = 10
 
-for dataDir in dataDirs:
+for dataDir in dataDirs[:5]:
     print('Processing ' + dataDir)
     
     for cvPart in cvParts:
         print('--' + cvPart)
         
-        outputDir = rootDir+'RNNTrainingSteps/Step3_SyntheticSentences/'+cvPart+'/'+dataDir+'_syntheticSentences'
+        outputDir = rootDir+f'RNNTrainingSteps/{syn_dir}/'+cvPart+'/'+dataDir+'_syntheticSentences'
         bashDir = rootDir+'bashScratch'
         repoDir = os.getcwd()
 
@@ -112,7 +112,7 @@ for dataDir in dataDirs:
         args['binSize'] = 2
         args['wordListFile'] = repoDir+'/wordList/google-10000-english-usa.txt' #from https://github.com/first20hours/google-10000-english
         args['rareWordFile'] = repoDir+'/wordList/rareWordIdx.mat'
-        args['snippetFile'] = rootDir+'RNNTrainingSteps/Step3_SyntheticSentences/'+cvPart+'/'+dataDir+'_snippets.mat'
+        args['snippetFile'] = rootDir+f'RNNTrainingSteps/{syn_dir}/'+cvPart+'/'+dataDir+'_snippets.mat'
         args['accountForPenState'] = 1
         args['charDef'] = getHandwritingCharacterDefinitions()
         args['seed'] = datetime.datetime.now().microsecond
