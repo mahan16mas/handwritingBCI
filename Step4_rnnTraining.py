@@ -22,7 +22,7 @@ dataDirs = ['t5.2019.05.08','t5.2019.11.25','t5.2019.12.09','t5.2019.12.11','t5.
             't5.2019.12.20','t5.2020.01.06','t5.2020.01.08','t5.2020.01.13','t5.2020.01.15']
 
 #use this train/test partition 
-cvPart = 'HeldOutTrials55'
+cvPart = 'HeldOutBlocks55'
 
 #name of the directory where this RNN run will be saved
 rnnOutputDir = cvPart
@@ -39,7 +39,7 @@ for x in range(len(dataDirs)):
     args['sentencesFile_'+str(x)] = rootDir+'Datasets/'+dataDirs[x]+'/sentences.mat'
     args['singleLettersFile_'+str(x)] = rootDir+'Datasets/'+dataDirs[x]+'/singleLetters.mat'
     args['labelsFile_'+str(x)] = rootDir+'RNNTrainingSteps/Step2_HMMLabels/'+cvPart+'/'+dataDirs[x]+'_timeSeriesLabels.mat'
-    args['syntheticDatasetDir_'+str(x)] = rootDir+'RNNTrainingSteps/Step3_SyntheticSentences/'+cvPart+'/'+dataDirs[x]+'_syntheticSentences/'
+    args['syntheticDatasetDir_'+str(x)] = rootDir+'RNNTrainingSteps/Step3_SyntheticSentences55/'+cvPart+'/'+dataDirs[x]+'_syntheticSentences/'
     args['cvPartitionFile_'+str(x)] = rootDir+'RNNTrainingSteps/trainTestPartitions_'+cvPart+'.mat'
     args['sessionName_'+str(x)] = dataDirs[x]
     
