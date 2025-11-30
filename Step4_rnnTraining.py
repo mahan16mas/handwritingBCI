@@ -65,7 +65,7 @@ scriptFile = os.getcwd()+'/charSeqRNN.py'
 #Run this cell to visualize the training process in real-time. You can stop it at any time without interrupting the
 #training.
 import time
-from IPython import display
+# from IPython import display
 from scipy.ndimage.filters import gaussian_filter1d
 j = 0
 while True:
