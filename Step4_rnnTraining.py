@@ -25,7 +25,7 @@ dataDirs = ['t5.2019.05.08','t5.2019.11.25','t5.2019.12.09','t5.2019.12.11','t5.
 cvPart = 'HeldOutBlocks55'
 
 #name of the directory where this RNN run will be saved
-rnnOutputDir = cvPart
+rnnOutputDir = '55_tw'
 
 #all RNN runs are saved in 'Step4_RNNTraining'
 if not os.path.isdir(rootDir + 'RNNTrainingSteps/Step4_RNNTraining'):
