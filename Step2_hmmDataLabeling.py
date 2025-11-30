@@ -25,6 +25,8 @@ charDef = getHandwritingCharacterDefinitions()
 #saves all labels in this folder
 if not os.path.isdir(rootDir + 'RNNTrainingSteps/Step2_HMMLabels'):
     os.mkdir(rootDir + 'RNNTrainingSteps/Step2_HMMLabels')
+
+twCubes = scipy.io.loadmat(rootDir+'RNNTrainingSteps/Step1_TimeWarping/'+'t5.2019.12.18'+'_warpedCubes.mat')
 #%%
 for dataDir in dataDirs:
     timeStart = datetime.datetime.now()
@@ -33,7 +35,7 @@ for dataDir in dataDirs:
     #load sentences, single letter, time-warped files, and train/test partitions
     sentenceDat = scipy.io.loadmat(rootDir+'Datasets/'+dataDir+'/sentences.mat')
     singleLetterDat = scipy.io.loadmat(rootDir+'Datasets/'+dataDir+'/singleLetters.mat')
-    twCubes = scipy.io.loadmat(rootDir+'RNNTrainingSteps/Step1_TimeWarping/'+dataDir+'_warpedCubes.mat')
+
 
     cvPart_heldOutBlocks = scipy.io.loadmat(rootDir+'RNNTrainingSteps/trainTestPartitions_HeldOutBlocks55.mat')
     cvPart_heldOutTrials = scipy.io.loadmat(rootDir+'RNNTrainingSteps/trainTestPartitions_HeldOutTrials.mat')
