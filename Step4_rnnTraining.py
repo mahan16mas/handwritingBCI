@@ -61,7 +61,7 @@ pickle.dump( args, open( args['outputDir'] + '/args.p', "wb" ) )
 import os
 argsFile = args['outputDir'] + '/args.p'
 scriptFile = os.getcwd()+'/charSeqRNN.py'
-print('python ' + scriptFile + ' --argsFile=' + argsFile + ' &')
+print('python ' + scriptFile + ' --argsFile=' + argsFile )
 # os.system('python3 ' + scriptFile + ' --argsFile=' + argsFile + ' &')
 #%%
 #Run this cell to visualize the training process in real-time. You can stop it at any time without interrupting the
