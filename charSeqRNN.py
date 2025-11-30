@@ -119,7 +119,7 @@ class charSeqRNN(object):
                     realIter = []
                 
                 #--validation data stream (real data, test partition)--
-                if len(valIdx)==0:
+                if len(valIdx)==0 or dayIdx < 5:
                     valIter = realIter
                     valDataExists = False
                 else:
