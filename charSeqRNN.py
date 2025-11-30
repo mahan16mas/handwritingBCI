@@ -645,7 +645,8 @@ class charSeqRNN(object):
                 recordFileSet = []
             
             if self.args['synthBatchSize']>0 and len(recordFileSet)==0:
-                sys.exit('Error! No synthetic files found in directory ' + self.args['syntheticDatasetDir_'+str(dayIdx)] + ', exiting.')
+                continue
+            #     sys.exit('Error! No synthetic files found in directory ' + self.args['syntheticDatasetDir_'+str(dayIdx)] + ', exiting.')
                          
             random.shuffle(recordFileSet)
             recordFileSet_all.append(recordFileSet)
