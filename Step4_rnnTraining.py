@@ -22,7 +22,7 @@ dataDirs = ['t5.2019.05.08','t5.2019.11.25','t5.2019.12.09','t5.2019.12.11','t5.
             't5.2019.12.20','t5.2020.01.06','t5.2020.01.08','t5.2020.01.13','t5.2020.01.15'][:5]
 
 #use this train/test partition 
-cvPart = 'HeldOutTrials'
+cvPart = 'HeldOutTrials55'
 
 #name of the directory where this RNN run will be saved
 rnnOutputDir = cvPart
@@ -48,11 +48,11 @@ if not os.path.isdir(args['outputDir']):
     os.mkdir(args['outputDir'])
     
 #this weights each day equally (0.1 probability for each day) and allocates a unique input layer for each day (0-9)
-# args['dayProbability'] = '[0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1]'
-# args['dayToLayerMap'] = '[0,1,2,3,4,5,6,7,8,9]'
+# args['dayProbability'] = '[0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0]'
+args['dayToLayerMap'] = '[0,1,2,3,4,4, 4, 4,4, 4]'
 
-args['dayProbability'] = '[0.2,0.2,0.2,0.2,0.2]'
-args['dayToLayerMap'] = '[0,1,2,3,4]'
+args['dayProbability'] = '[0.2,0.2,0.2,0.2,0.2, 0, 0,0 ,0,0]'
+# args['dayToLayerMap'] = '[0,1,2,3,4]'
 #save the arguments dictionary so that the RNN program can load it
 pickle.dump( args, open( args['outputDir'] + '/args.p', "wb" ) )
 #%%

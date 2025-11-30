@@ -27,7 +27,7 @@ dataDirs = ['t5.2019.05.08','t5.2019.11.25','t5.2019.12.09','t5.2019.12.11','t5.
             't5.2019.12.20','t5.2020.01.06','t5.2020.01.08','t5.2020.01.13','t5.2020.01.15']
 
 #construct synthetic data for both training partitions
-cvParts = ['HeldOutBlocks', 'HeldOutTrials']
+cvParts = ['HeldOutBlocks55', 'HeldOutTrials'][:1]
 
 #defines the list of all 31 characters and what to call them
 charDef = getHandwritingCharacterDefinitions()
@@ -38,7 +38,7 @@ if not os.path.isdir(rootDir + 'RNNTrainingSteps/' + syn_dir):
 #%%
 #First, we generate snippet libraries for each dataset by cutting out each letter from each sentence. These can then
 #be re-arranged into new لsequences.
-for dataDir in dataDirs[:5]:
+for dataDir in dataDirs:
     print('Processing ' + dataDir)
 
     for cvPart in cvParts:
@@ -90,7 +90,7 @@ for dataDir in dataDirs[:5]:
 #Decrease if it uses too much memory on your machine. (10 uses ~30 GB of RAM)
 nParallelProcesses = 10
 
-for dataDir in dataDirs[:5]:
+for dataDir in dataDirs:
     print('Processing ' + dataDir)
     
     for cvPart in cvParts:

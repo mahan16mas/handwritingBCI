@@ -35,16 +35,16 @@ for dataDir in dataDirs:
     singleLetterDat = scipy.io.loadmat(rootDir+'Datasets/'+dataDir+'/singleLetters.mat')
     twCubes = scipy.io.loadmat(rootDir+'RNNTrainingSteps/Step1_TimeWarping/'+dataDir+'_warpedCubes.mat')
 
-    cvPart_heldOutBlocks = scipy.io.loadmat(rootDir+'RNNTrainingSteps/trainTestPartitions_HeldOutBlocks.mat')
+    cvPart_heldOutBlocks = scipy.io.loadmat(rootDir+'RNNTrainingSteps/trainTestPartitions_HeldOutBlocks55.mat')
     cvPart_heldOutTrials = scipy.io.loadmat(rootDir+'RNNTrainingSteps/trainTestPartitions_HeldOutTrials.mat')
-    cvParts = [cvPart_heldOutBlocks, cvPart_heldOutTrials]
+    cvParts = [cvPart_heldOutBlocks, cvPart_heldOutTrials][:1]
     
     #the last two sessions have hashmarks (#) to indicate that T5 should take a brief pause
     #here we remove these from the sentence prompts, otherwise the code below will get confused (because # isn't a character)
     for x in range(sentenceDat['sentencePrompt'].shape[0]):
         sentenceDat['sentencePrompt'][x,0][0] = sentenceDat['sentencePrompt'][x,0][0].replace('#','')
     
-    cvFolderNames = ['HeldOutBlocks', 'HeldOutTrials']
+    cvFolderNames = ['HeldOutBlocks55', 'HeldOutTrials'][:1]
     
     sentences = sentenceDat['sentencePrompt'][:,0]
     sentenceLens = sentenceDat['numTimeBinsPerSentence'][:,0]
