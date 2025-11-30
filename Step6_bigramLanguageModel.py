@@ -56,7 +56,7 @@ plt.xlabel('Time Step')
 plt.ylabel('Character Log Probability\n(31 characters + CTC blank)')
 plt.colorbar(fraction=0.046, pad=0.04)
 plt.title('Example Kaldi Probability Matrix')
-plt.show()
+plt.savefig('step6.png')
 #%%
 #Now call kaldi to apply the language model to the probability matrices created above.
 #Note that you will need kaldi (https://github.com/kaldi-asr/kaldi) 
