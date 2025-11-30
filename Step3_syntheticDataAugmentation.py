@@ -24,7 +24,7 @@ rootDir = "/data/hossein/mm_project/" + '/handwritingBCIData/'
 
 #define which datasets to process
 dataDirs = ['t5.2019.05.08','t5.2019.11.25','t5.2019.12.09','t5.2019.12.11','t5.2019.12.18',
-            't5.2019.12.20','t5.2020.01.06','t5.2020.01.08','t5.2020.01.13','t5.2020.01.15']
+            't5.2019.12.20','t5.2020.01.06','t5.2020.01.08','t5.2020.01.13','t5.2020.01.15'][:5]
 
 #construct synthetic data for both training partitions
 cvParts = ['HeldOutBlocks55', 'HeldOutTrials'][:1]
