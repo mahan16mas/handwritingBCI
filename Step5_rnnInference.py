@@ -19,7 +19,7 @@ rootDir = "/data/hossein/mm_project" + '/handwritingBCIData/'
 
 #evaluate the RNN on these datasets
 dataDirs = ['t5.2019.05.08','t5.2019.11.25','t5.2019.12.09','t5.2019.12.11','t5.2019.12.18',
-            't5.2019.12.20','t5.2020.01.06','t5.2020.01.08','t5.2020.01.13','t5.2020.01.15']
+            't5.2019.12.20','t5.2020.01.06','t5.2020.01.08','t5.2020.01.13','t5.2020.01.15'][5:]
 
 #use this train/test partition
 cvPart = 'HeldOutBlocks55'
@@ -65,7 +65,7 @@ for x in range(len(dataDirs)):
     args['sessionName_0'] = dataDirs[x]
 
     args['inferenceOutputFileName'] = inferenceSaveDir + '/' + dataDirs[x] + '_inferenceOutputs.mat'
-    args['inferenceInputLayer'] = x
+    args['inferenceInputLayer'] = 4
     
     #instantiate the RNN model
     rnnModel = charSeqRNN(args=args)
