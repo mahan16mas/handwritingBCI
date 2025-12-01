@@ -25,7 +25,7 @@ dataDirs = ['t5.2019.05.08','t5.2019.11.25','t5.2019.12.09','t5.2019.12.11','t5.
 cvPart = 'HeldOutBlocks55'
 
 #point this towards the specific RNN we want to evaluate
-rnnOutputDir = cvPart
+rnnOutputDir = '55_tw'
 
 #this prevents tensorflow from taking over more than one gpu on a multi-gpu machine
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
