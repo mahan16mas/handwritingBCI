@@ -46,7 +46,7 @@ def softmax(x):
 
 n = len(rnn_outputs["logits"])
 for i in range(n):
-    logits = rnn_outputs["logits"][0]
+    logits = rnn_outputs["logits"][i]
     logits = logits[:, charDef['idxToKaldi']]
     if not isinstance(logits, np.ndarray):
         logits = logits.numpy()
