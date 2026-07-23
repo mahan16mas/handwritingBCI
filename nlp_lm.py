@@ -3,8 +3,17 @@ import sys, os
 import numpy as np
 from pyctcdecode import build_ctcdecoder
 
-labels = ['', 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
-                 '>',',',"'",'~','?']
+labels = [
+    "",    # ایندکس 0 مربوط به <ctc> یا همان CTC Blank است
+    " ",   # ایندکس 1 که جایگزین '>' (فاصله/Space) است
+    "'",   # ایندکس 2
+    ",",   # ایندکس 3
+    ".",   # ایندکس 4 که جایگزین '~' است
+    "?",   # ایندکس 5
+    "a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
+    "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
+    "u", "v", "w", "x", "y", "z"
+]
 prefix = ''
 rootDir = "/data/hossein/mm_project" + '/handwritingBCIData/'
 langModelDir = rootDir+'BigramLM'
