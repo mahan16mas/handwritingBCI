@@ -3,13 +3,12 @@ import sys, os
 import numpy as np
 from pyctcdecode import build_ctcdecoder
 
-labels = [
-    "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
-    "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
-    " ", "'", ".", ",", ""
-]
+labels = ['', 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+                 '>',',',"'",'~','?']
+prefix = ''
 rootDir = "/data/hossein/mm_project" + '/handwritingBCIData/'
 langModelDir = rootDir+'BigramLM'
+folder = "nlp_10_1_layer_11_5_days_20ms"
 with open(f'/data/hossein/mm_project/speech_gru_cebra/{folder}/{prefix}logits', 'rb') as f:
     rnn_outputs = pickle.load(f)
 for key in ["logits"]:
