@@ -29,6 +29,8 @@ def softmax(x):
     e_x = np.exp(x - np.max(x, axis=-1, keepdims=True))
     return e_x / e_x.sum(axis=-1, keepdims=True)
 logits = rnn_outputs["logits"][0]
+if not isinstance(logits, np.ndarray):
+    logits = logits.numpy()
 probs = softmax(logits)
 
 decoded_text = decoder.decode(probs)
