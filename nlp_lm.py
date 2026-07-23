@@ -39,6 +39,7 @@ def softmax(x):
     e_x = np.exp(x - np.max(x, axis=-1, keepdims=True))
     return e_x / e_x.sum(axis=-1, keepdims=True)
 logits = rnn_outputs["logits"][0]
+logits[:, :] = logits[:, list(range(1, 31)) + [0]]
 logits = logits[:, charDef['idxToKaldi']]
 if not isinstance(logits, np.ndarray):
     logits = logits.numpy()
