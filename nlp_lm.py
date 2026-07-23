@@ -68,6 +68,6 @@ for text, lm_state, timesteps, logit_score, lm_score in beams[:N_BEST]:
     })
 
 best_hypothesis = min(nbest_results, key=lambda x: x['total_score'])
-for hyp in best_hypothesis:
+for hyp in nbest_results:
     print(hyp['text'])
 print("Best Decoded Text:", best_hypothesis['text'])
