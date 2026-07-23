@@ -18,7 +18,8 @@ prefix = ''
 charDef = getHandwritingCharacterDefinitions()
 rootDir = "/data/hossein/mm_project" + '/handwritingBCIData/'
 langModelDir = rootDir+'BigramLM'
-folder = "nlp_10_1_layer_11_5_days_20ms"
+i = 0
+folder = f"nlp10-l208-rdpns{i}ro"
 with open(f'/data/hossein/mm_project/speech_gru_cebra/{folder}/{prefix}logits', 'rb') as f:
     rnn_outputs = pickle.load(f)
 for key in ["logits"]:
