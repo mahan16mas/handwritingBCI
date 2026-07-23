@@ -111,7 +111,7 @@ for i in range(n):
 
     for text, lm_state, timesteps, logit_score, lm_score in beams[:N_BEST]:
         scaled_ac_score = logit_score * ACOUSTIC_SCALE
-        gpt2_score = compute_gpt2_score(text)
+        gpt2_score = compute_exact_gpt2_lm_rescore(text)
         final_rescored_total = -scaled_ac_score + (2.0 * gpt2_score)
 
         nbest_results.append({
