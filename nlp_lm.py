@@ -28,7 +28,7 @@ for key in ["logits"]:
         new_list.append(np.array(item))
     rnn_outputs[key] = new_list
 
-ACOUSTIC_SCALE = 0.8
+ACOUSTIC_SCALE = 1.0
 BEAM_WIDTH = 65
 N_BEST = 128
 ALPHA = 1.0 / ACOUSTIC_SCALE
