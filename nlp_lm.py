@@ -5,8 +5,18 @@ import torch
 from transformers import GPT2LMHeadModel, GPT2TokenizerFast
 from pyctcdecode import build_ctcdecoder
 from characterDefinitions import getHandwritingCharacterDefinitions
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--folder', type=str, required=True)
+parser.add_argument('--version', type=int, default=21)
+args = parser.parse_args()
+folder = args.folder
+dataset_name = f"nlp{args.version}"
+multi = 'multi'  in folder or (folder.startswith('256-dim'))
+prefix = f"{dataset_name}_" if multi else ""
 cache_dir = '/data/hossein/mm_project/cache/'
-
+with open(f'/data/hossein/mm_project/speech_gru_cebra/nlp{args.version}.pkl', 'rb') as f:
+    sentences = pickle.load(f)
 device = "cuda" if torch.cuda.is_available() else "cpu"
 gpt_tokenizer = GPT2TokenizerFast.from_pretrained("gpt2-xl", cache_dir=cache_dir)
 gpt_model = GPT2LMHeadModel.from_pretrained("gpt2-xl", cache_dir=cache_dir).to(device)
@@ -37,12 +47,9 @@ labels = [
     "u", "v", "w", "x", "y", "z"
 ]
 
-prefix = ''
 charDef = getHandwritingCharacterDefinitions()
 rootDir = "/data/hossein/mm_project" + '/handwritingBCIData/'
 langModelDir = rootDir + 'BigramLM'
-i = 0
-folder = f"nlp10-l208-rdpns{i}ro"
 
 with open(f'/data/hossein/mm_project/speech_gru_cebra/{folder}/{prefix}logits', 'rb') as f:
     rnn_outputs = pickle.load(f)
@@ -73,6 +80,7 @@ def softmax(x):
 n = len(rnn_outputs["logits"])
 for i in range(n):
     logits = rnn_outputs["logits"][i]
+    sentence = sentences[i]
     logits = logits[:, charDef['idxToKaldi']]
     if not isinstance(logits, np.ndarray):
         logits = logits.numpy()
@@ -100,3 +108,5 @@ for i in range(n):
     best_hypothesis = min(nbest_results, key=lambda x: x['total_score'])
 
     print("Best Decoded Text:", best_hypothesis['text'])
+    print("True Sentence:", sentence)
+    print("#"*20)
