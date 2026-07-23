@@ -72,7 +72,6 @@ decoder = build_ctcdecoder(
     alpha=ALPHA,
     beta=BETA
 )
-help(decoder.decode_beams)
 def softmax(x):
     e_x = np.exp(x - np.max(x, axis=-1, keepdims=True))
     return e_x / e_x.sum(axis=-1, keepdims=True)
@@ -91,10 +90,11 @@ for i in range(n):
     probs = softmax(logits)
 
     beams = decoder.decode_beams(
-        probs,
+        logits=probs,
         beam_width=BEAM_WIDTH,
-        beam_pruning_logp=-10.0,
-        token_min_logp=-10.0
+        beam_prune_logp=-10.0,
+        token_min_logp=-10.0,
+        prune_history=True
     )
 
     nbest_results = []
