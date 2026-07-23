@@ -54,7 +54,6 @@ probs = softmax(logits)
 beams = decoder.decode_beams(
     probs,
     beam_width=BEAM_WIDTH,
-    prune_log_pt=-10.0
 )
 
 nbest_results = []
