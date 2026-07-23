@@ -18,8 +18,10 @@ cache_dir = '/data/hossein/mm_project/cache/'
 with open(f'/data/hossein/mm_project/speech_gru_cebra/nlp{args.version}.pkl', 'rb') as f:
     sentences = pickle.load(f)
 device = "cuda" if torch.cuda.is_available() else "cpu"
-gpt_tokenizer = GPT2TokenizerFast.from_pretrained("/data/hossein/mm_project/cache/gpt2_local")
-gpt_model = GPT2LMHeadModel.from_pretrained("gpt2", cache_dir=cache_dir).to(device)
+local_gpt2_path = "/data/hossein/mm_project/cache/gpt2_local"
+
+gpt_tokenizer = GPT2TokenizerFast.from_pretrained(local_gpt2_path)
+gpt_model = GPT2LMHeadModel.from_pretrained(local_gpt2_path).to(device)
 gpt_model.eval()
 
 def compute_exact_gpt2_lm_rescore(text):
