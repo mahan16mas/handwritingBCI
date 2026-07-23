@@ -87,7 +87,7 @@ for i in range(n):
     logits = logits[:, charDef['idxToKaldi']]
     if not isinstance(logits, np.ndarray):
         logits = logits.numpy()
-    probs = softmax(logits)
+    probs = logits * ACOUSTIC_SCALE
 
     beams = decoder.decode_beams(
         logits=probs,
