@@ -79,7 +79,8 @@ def softmax(x):
 
 n = len(rnn_outputs["logits"])
 for i in range(n):
-    logits = rnn_outputs["logits"][i]
+    length = (rnn_outputs["logitLengths"][i])
+    logits = rnn_outputs["logits"][i][:length]
     sentence = sentences[i]
     logits = logits[:, charDef['idxToKaldi']]
     if not isinstance(logits, np.ndarray):
