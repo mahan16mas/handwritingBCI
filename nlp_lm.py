@@ -5,10 +5,11 @@ import torch
 from transformers import GPT2LMHeadModel, GPT2TokenizerFast
 from pyctcdecode import build_ctcdecoder
 from characterDefinitions import getHandwritingCharacterDefinitions
+cache_dir = '/data/hossein/mm_project/cache/'
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
-gpt_tokenizer = GPT2TokenizerFast.from_pretrained("gpt2-xl")
-gpt_model = GPT2LMHeadModel.from_pretrained("gpt2-xl").to(device)
+gpt_tokenizer = GPT2TokenizerFast.from_pretrained("gpt2-xl", cache_dir=cache_dir)
+gpt_model = GPT2LMHeadModel.from_pretrained("gpt2-xl", cache_dir=cache_dir).to(device)
 gpt_model.eval()
 
 def compute_gpt2_score(text):
