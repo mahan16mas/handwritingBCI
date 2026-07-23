@@ -82,6 +82,9 @@ for i in range(n):
     length = (rnn_outputs["logitLengths"][i])
     logits = rnn_outputs["logits"][i][:length]
     sentence = sentences[i]
+    trueText = sentence.replace('>', ' ')
+    trueText = trueText.replace('~', '.')
+    sentence = trueText.replace('#', '')
     logits = logits[:, charDef['idxToKaldi']]
     if not isinstance(logits, np.ndarray):
         logits = logits.numpy()
