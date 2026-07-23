@@ -2,7 +2,7 @@ import pickle
 import sys, os
 import numpy as np
 from pyctcdecode import build_ctcdecoder
-
+from characterDefinitions import getHandwritingCharacterDefinitions
 labels = [
     "",    # ایندکس 0 مربوط به <ctc> یا همان CTC Blank است
     " ",   # ایندکس 1 که جایگزین '>' (فاصله/Space) است
@@ -15,6 +15,7 @@ labels = [
     "u", "v", "w", "x", "y", "z"
 ]
 prefix = ''
+charDef = getHandwritingCharacterDefinitions()
 rootDir = "/data/hossein/mm_project" + '/handwritingBCIData/'
 langModelDir = rootDir+'BigramLM'
 folder = "nlp_10_1_layer_11_5_days_20ms"
@@ -38,6 +39,7 @@ def softmax(x):
     e_x = np.exp(x - np.max(x, axis=-1, keepdims=True))
     return e_x / e_x.sum(axis=-1, keepdims=True)
 logits = rnn_outputs["logits"][0]
+logits = logits[:, charDef['idxToKaldi']]
 if not isinstance(logits, np.ndarray):
     logits = logits.numpy()
 probs = softmax(logits)
