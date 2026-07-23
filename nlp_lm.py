@@ -93,6 +93,8 @@ for i in range(n):
     beams = decoder.decode_beams(
         probs,
         beam_width=BEAM_WIDTH,
+        beam_pruning_logp=-10.0,
+        token_min_logp=-10.0
     )
 
     nbest_results = []
