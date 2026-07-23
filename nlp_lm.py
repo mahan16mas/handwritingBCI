@@ -22,18 +22,28 @@ gpt_tokenizer = GPT2TokenizerFast.from_pretrained("gpt2-xl", cache_dir=cache_dir
 gpt_model = GPT2LMHeadModel.from_pretrained("gpt2-xl", cache_dir=cache_dir).to(device)
 gpt_model.eval()
 
-def compute_gpt2_score(text):
+def compute_exact_gpt2_lm_rescore(text):
     if not text.strip():
         return 9999.0
+
+
     text_formatted = text[0].upper() + text[1:] if len(text) > 0 else text
-    inputs = gpt_tokenizer(text_formatted, return_tensors="pt").to(device)
-    input_ids = inputs["input_ids"]
-    if input_ids.shape[1] <= 1:
-        return 9999.0
+    input_ids = gpt_tokenizer.encode(text_formatted)
+    enc_text = [50256] + input_ids + [50256]
+    tensor_input = torch.tensor([enc_text], dtype=torch.long).to(device)
+
     with torch.no_grad():
-        outputs = gpt_model(input_ids, labels=input_ids)
-        neg_log_likelihood = outputs.loss.item() * (input_ids.shape[1] - 1)
-    return neg_log_likelihood
+        outputs = gpt_model(tensor_input)
+        logits = outputs.logits
+        log_probs = torch.log_softmax(logits, dim=-1)
+
+        log_sum = 0.0
+        for t in range(1, len(enc_text)):
+            target_token_id = enc_text[t]
+            log_sum += log_probs[0, t - 1, target_token_id].item()
+
+    lm_rescore = -log_sum
+    return lm_rescore
 
 labels = [
     "",
