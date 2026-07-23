@@ -111,7 +111,7 @@ for i in range(n):
             'total_score': final_rescored_total
         })
 
-    best_hypothesis = min(nbest_results, key=lambda x: x['total_score'])
+    best_hypothesis = max(nbest_results, key=lambda x: x['total_score'])
 
     print("Best Decoded Text:", best_hypothesis['text'])
     print("True Sentence:", sentence)
